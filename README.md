@@ -105,6 +105,6 @@
 * Takes a dataframe with columns 'Close', 'High', 'Low', and 'Volume'
 * Returns a dataframe with 'avg_price', 'current_day', 'prev_day', 'daily_cum_vol', 'vwap' and 'signal' added to the original df
     * The signal column contains either a -1 or 0
-        * -1 means that the current price is below the VWAP and can be considered bullish
-        * 1 means that the current price is above VWAP and can be considered bearish
+        * -1 means that the current price is below the VWAP and can be considered bearish
+        * 1 means that the current price is above VWAP and can be considered bullish
 * You could also use VWAP to pick an entry/exit price --> if the current price is below VWAP, then you could think of it as getting in at a 'below average' price.  Vice versa when it is above.  So use this signal in accordance with your strategy.
