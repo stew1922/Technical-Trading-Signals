@@ -31,6 +31,7 @@
     * optionally, takes ***period_fast*** which is the faster window of the two EWMAs being compared for the MACD line
         * Default: `period_fast=12`
     * optionally, takes ***period_signal*** which is the window for the EWMA of the Signal line
+        * Default: `period_signal=9`
 * Returns a dataframe with 'close', 'slow_ewma', 'fast_ewma', 'macd', 'signal_line', 'con_div', 'macd_signal', 'condiv_signal', and 'signal' columns
     * The 'signal' column contains a -1, 0, or 1:
         * -0 means bearish as both the MACD and convergence/divergence are bearish
