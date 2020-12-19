@@ -11,7 +11,7 @@
 * [PSAR](#PSAR)
 
 #### Bollinger Bands
-* [Code](signals.py#Bollinger-Bands)
+* [Code](signals/signals/signals.py#Bollinger-Bands)
 * Takes a dataframe with a single datetime index that contains a column labeled 'Close'
     * optionally, can enter ***bb_period*** which is the window size for the SMA's used in the middle, lower and upper bands as well as the SMA used in the signal calculation.  
         * Default: `bb_period=20`
@@ -24,7 +24,7 @@
 * A reading of 1 can indicate a period of relative calm that would insinuate that a period of volatility is just around the corner.
 
 #### MACD
-* [Code](signals.py#MACD)
+* [Code](signals/signals.py#MACD)
 * Takes a dataframe that has a datetime index and contains a column labeled 'Close'
     * optionally, takes ***period_slow*** which is the slower window of the two EWMAs being compared for the MACD line
         * Default: `period_slow=26`
@@ -38,7 +38,7 @@
         * 1 means bullish as both the MACD and convergence/divergence are bullish
 
 #### EMA
-* [Code](signals.py#Exponential-Weighted-Moving-Average)
+* [Code](signals/signals.py#Exponential-Weighted-Moving-Average)
 * Takes a dataframe with a single datetime index that contains a column labeled 'Close'
 * Takes ***period*** which is the window that is used for the EWMA
     * This is not optional, and no default value exists
@@ -48,7 +48,7 @@
         * 1 means that the current closing price is above the EWMA and is considered bullish from a momentum standpoint
 
 #### EMA Crossovers
-* [Code](signals.py#Exponential-Weighted-Moving-Average-Crossover-Indicator)
+* [Code](signals/signals.py#Exponential-Weighted-Moving-Average-Crossover-Indicator)
 * Takes a dataframe with a single datetime index that contains a column labeled 'Close'
     * optionally, takes ***period_fast*** which is the faster window of the two EMWAs being compared
         * Default: `period_fast=9`
@@ -61,7 +61,7 @@
         * 1 means the fast EWMA has crossed up above the slow EWMA and is generally considered bullish
 
 #### SMA
-* [Code](signals.py#SMA)
+* [Code](signals/signals.py#SMA)
 * Takes a dataframe with a single datetime index that contains a column labeled 'Close'
 * Takes ***period*** which is the window that is used for the SMA
     * This is not optional, and no default value exists
@@ -71,7 +71,7 @@
         * 1 means that the current closing price is above the SMA and is considered bullish from a momentum standpoint
 
 #### RSI
-* [Code](signals.py#RSI)
+* [Code](signals/signals.py#RSI)
 * Takes a dataframe with a single datetime index that contains a column labeled 'Close'
     * optionally, takes ***period*** which is the window that is used for the EMA
         * Default: `period=14`
@@ -86,7 +86,7 @@
         * 1 means that the current closing price is below the oversold value and is considered bullish
 
 #### PSAR
-* [Code](signals.py#PSAR)
+* [Code](signals/signals.py#PSAR)
 * Takes a dataframe with a single datetime index that contains columns labeled 'Close', 'Low', and 'High'
     * optionally, takes ***af_start*** which is the beginning point for the Acceleration Factoer (AF)
         * Default: `af_start=0.02`
@@ -99,3 +99,12 @@
         * -1 means that the trend is downward and could be considered bearish
         * 1 means that the trend is upward and could be considered bullish
 * Other data can be obtained from this signal, i.e. - the 'psar_final' column could be considered a stop for any closing period as a risk mitigation strategy (if you are in an uptrend and you take out a long position, and then the price drops to the PSAR; that is the stop that would signal to exit the trade as the trend is flipping and becoming bearish)
+
+### VWAP
+* [Code](signals/signals.py#VWAP)
+* Takes a dataframe with columns 'Close', 'High', 'Low', and 'Volume'
+* Returns a dataframe with 'avg_price', 'current_day', 'prev_day', 'daily_cum_vol', 'vwap' and 'signal' added to the original df
+    * The signal column contains either a -1 or 0
+        * -1 means that the current price is below the VWAP and can be considered bullish
+        * 1 means that the current price is above VWAP and can be considered bearish
+* You could also use VWAP to pick an entry/exit price --> if the current price is below VWAP, then you could think of it as getting in at a 'below average' price.  Vice versa when it is above.  So use this signal in accordance with your strategy.
