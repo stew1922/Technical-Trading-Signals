@@ -34,8 +34,8 @@
         * Default: `period_signal=9`
 * Returns a dataframe with 'close', 'slow_ewma', 'fast_ewma', 'macd', 'signal_line', 'con_div', 'macd_signal', 'condiv_signal', and 'signal' columns
     * The 'signal' column contains a -1, 0, or 1:
-        * -0 means bearish as both the MACD and convergence/divergence are bearish
-        * 1 means neutral as either the MACD or convergence/divergence is bearish and the other is bullish
+        * -1 means bearish as both the MACD and convergence/divergence are bearish
+        * 0 means neutral as either the MACD or convergence/divergence is bearish and the other is bullish
         * 1 means bullish as both the MACD and convergence/divergence are bullish
 
 #### EMA
