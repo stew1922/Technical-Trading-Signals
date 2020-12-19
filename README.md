@@ -1,5 +1,5 @@
 # Signal Generator Library
-### All signals that are used to power the algorithm will be housed here.
+### A libraray of technical trading signals.
 
 ## Table of Contents
 * [Bollinger Bands](#Bollinger-Bands)
