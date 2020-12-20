@@ -262,7 +262,7 @@ def psar(data, af_start=0.02, af_step=0.02, af_max=0.20):
             # 5) Update the low and high for the current trend, if necessary
             data.trend_low.iloc[iloc] = data.Low.iloc[iloc] if data.trend_low.iloc[iloc-1] > data.Low.iloc[iloc] else data.trend_low.iloc[iloc-1]
             data.trend_high.iloc[iloc] = data.High.iloc[iloc] if data.trend_high.iloc[iloc-1] < data.High.iloc[iloc] else data.trend_high.iloc[iloc-1]
-            #6) If the initial PSAR is GREATER THAN the current High, the psar_final == psar_intial, otherwise the trend flips and the parameters reset -- trend == 1, PSAR == EP, EP == trend's High, AF == af_start, and trend_high and trend_low reset
+            #6) If the initial PSAR is GREATER THAN the current High, the psar_final == psar_intial, otherwise the trend flips and the parameters reset -- trend == 1, PSAR == EP, EP == current High, AF == af_start, and trend_high and trend_low reset
             if data.psar_init.iloc[iloc] > data.High.iloc[iloc]:
                 data.psar_final.iloc[iloc] = data.psar_init.iloc[iloc]
             else:
@@ -294,7 +294,7 @@ def psar(data, af_start=0.02, af_step=0.02, af_max=0.20):
             # 5) Update the low and high for the current trend, if necessary
             data.trend_low.iloc[iloc] = data.Low.iloc[iloc] if data.trend_low.iloc[iloc-1] > data.Low.iloc[iloc] else data.trend_low.iloc[iloc-1]
             data.trend_high.iloc[iloc] = data.High.iloc[iloc] if data.trend_high.iloc[iloc-1] < data.High.iloc[iloc] else data.trend_high.iloc[iloc-1]
-            #6) If the initial PSAR is LESS THAN the current Low, the psar_final == psar_intial, otherwise the trend flips and the parameters reset -- trend == 0, PSAR == EP, EP == trend's Low, AF == af_start, and trend_high and trend_low reset
+            #6) If the initial PSAR is LESS THAN the current Low, the psar_final == psar_intial, otherwise the trend flips and the parameters reset -- trend == 0, PSAR == EP, EP == current Low, AF == af_start, and trend_high and trend_low reset
             if data.psar_init.iloc[iloc] < data.Low.iloc[iloc]:
                 data.psar_final.iloc[iloc] = data.psar_init.iloc[iloc]
             else:
@@ -313,14 +313,14 @@ def psar(data, af_start=0.02, af_step=0.02, af_max=0.20):
     return data
 
 # VWAP
-# The Volume Weighted Average Price (VWAP) takes in a datafram with columns 'Close', 'High', 'Low', and 'Volume'
+# The Volume Weighted Average Price (VWAP) takes in a dataframe with columns 'Close', 'High', 'Low', and 'Volume'
 # returns a dataframe with 'avg_price', 'current_day', 'prev_day', 'daily_cum_vol', 'vwap' and 'signal' added to the original df
 def vwap(data):
     # VWAP = volume weighted average price
     # VWAP = sumS(volume) * sum(avg. price) / sum(volume)
         # avg price = (high + close + low) / 3
         # the volume and price is a running cumulative for the DAY (restarts everyday)
-            # Since it restarts everyday, this is not a great tool on the daily timeframe (on the daily timeframe, VWAP is just equal to the avg price), so it is better to use this tool only on *INTRADAY* time frames.  
+            # Since it restarts everyday, this is not a great tool on the daily timeframe and above (on the daily timeframe, VWAP is just equal to the avg price), so it is better to use this tool only on *INTRADAY* time frames.  
 
     data['avg_price'] = (data.Close + data.High + data.Low) / 3
     data['curent_day'] = data.index.weekday
