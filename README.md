@@ -9,6 +9,7 @@
 * [SMA](#SMA)
 * [RSI](#RSI)
 * [PSAR](#PSAR)
+* [VWAP](#VWAP)
 
 #### Bollinger Bands
 * [Code](signals/signals/signals.py#Bollinger-Bands)
