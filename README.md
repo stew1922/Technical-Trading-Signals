@@ -102,7 +102,7 @@
         * 1 means that the trend is upward and could be considered bullish
 * Other data can be obtained from this signal, i.e. - the 'psar_final' column could be considered a stop for any closing period as a risk mitigation strategy (if you are in an uptrend and you take out a long position, and then the price drops to the PSAR; that is the stop that would signal to exit the trade as the trend is flipping and becoming bearish)
 
-### VWAP
+#### VWAP
 * [Code](signals/signals.py#VWAP)
 * Takes a dataframe with columns 'Close', 'High', 'Low', and 'Volume'
 * Returns a dataframe with 'avg_price', 'current_day', 'prev_day', 'daily_cum_vol', 'vwap' and 'signal' added to the original df
