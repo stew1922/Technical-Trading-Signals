@@ -9,6 +9,7 @@
 * [SMA](#SMA)
 * [RSI](#RSI)
 * [PSAR](#PSAR)
+* [VWAP](#VWAP)
 
 #### Bollinger Bands
 * [Code](signals/signals/signals.py#Bollinger-Bands)
@@ -31,10 +32,11 @@
     * optionally, takes ***period_fast*** which is the faster window of the two EWMAs being compared for the MACD line
         * Default: `period_fast=12`
     * optionally, takes ***period_signal*** which is the window for the EWMA of the Signal line
+        * Default: `period_signal=9`
 * Returns a dataframe with 'close', 'slow_ewma', 'fast_ewma', 'macd', 'signal_line', 'con_div', 'macd_signal', 'condiv_signal', and 'signal' columns
     * The 'signal' column contains a -1, 0, or 1:
-        * -0 means bearish as both the MACD and convergence/divergence are bearish
-        * 1 means neutral as either the MACD or convergence/divergence is bearish and the other is bullish
+        * -1 means bearish as both the MACD and convergence/divergence are bearish
+        * 0 means neutral as either the MACD or convergence/divergence is bearish and the other is bullish
         * 1 means bullish as both the MACD and convergence/divergence are bullish
 
 #### EMA
@@ -100,11 +102,12 @@
         * 1 means that the trend is upward and could be considered bullish
 * Other data can be obtained from this signal, i.e. - the 'psar_final' column could be considered a stop for any closing period as a risk mitigation strategy (if you are in an uptrend and you take out a long position, and then the price drops to the PSAR; that is the stop that would signal to exit the trade as the trend is flipping and becoming bearish)
 
-### VWAP
+#### VWAP
+* STILL TESTING -- CONSIDER THIS IN BETA
 * [Code](signals/signals.py#VWAP)
 * Takes a dataframe with columns 'Close', 'High', 'Low', and 'Volume'
 * Returns a dataframe with 'avg_price', 'current_day', 'prev_day', 'daily_cum_vol', 'vwap' and 'signal' added to the original df
-    * The signal column contains either a -1 or 0
-        * -1 means that the current price is below the VWAP and can be considered bullish
-        * 1 means that the current price is above VWAP and can be considered bearish
+    * The signal column contains either a 1 or -1
+        * -1 means that the current price is below the VWAP and can be considered bearish _from a momentum standpoint_
+        * 1 means that the current price is above VWAP and can be considered bullish _from a momentum standpoint_
 * You could also use VWAP to pick an entry/exit price --> if the current price is below VWAP, then you could think of it as getting in at a 'below average' price.  Vice versa when it is above.  So use this signal in accordance with your strategy.
