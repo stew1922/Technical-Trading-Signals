@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 # Exponential Weighted Moving Average Crossover Indicator
 # takes in a dataframe with columns 'Close' and a datetime as the index
