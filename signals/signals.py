@@ -334,6 +334,6 @@ def vwap(data):
             data['daily_cum_vol'].iloc[day] = data.Volume.iloc[day]
 
     data['vwap'] = (data.daily_cum_vol * data.avg_price) / data.daily_cum_vol
-    data['signal'] = data.vwap.gt(data.Close).astype(float)
+    data.signal = np.where(data.vwap > data.Close, 1, 0)
     return data
 
